@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Zorunlu Alan</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- font-awesome.min.css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <form action="#" method="post">
+        <div class="container">
+            <div class="well">
+                <div class="form-group">
+                    <label>Text 1</label>
+                    <input type="text" class="form-control zorunlu-text">
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>Text 2</label>
+                    <input type="text" class="form-control zorunlu-text">
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>Select 1</label>
+                    <Select class="form-control zorunlu-dropdown">
+                        <option value="-1">Select</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </Select>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>Select 2</label>
+                    <Select class="form-control zorunlu-dropdown">
+                        <option value="-1">Select</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                    </Select>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="option1" class="zorunlu-check"> Checkbox 1
+                        </label>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="checkbox ">
+                        <label>
+                            <input type="checkbox" value="option2" class="zorunlu-check"> Checkbox 2
+                        </label>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="radio" value="option1" class="zorunlu-radio">
+                            Radio 1
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="radio" value="option2" class="zorunlu-radio">
+                            Radio 2
+                        </label>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-submit" value="Send form">
+                </div>
+                <!-- /.form-group -->
+                <div class="alert alert-danger" role="alert">Please fill the required fields.</div>
+            </div>
+        </div>
+    </form>
+    <!-- VALIDATION -->
+    <script>
+
+        // var errorAlert1 = '<div class="alert alert-danger" role="alert">Plakada yanlış karakter mevcut.</div>';
+        // var errorAlert2 = '<div class="alert alert-danger" role="alert">Plaka 8 karakterden büyük olamaz.</div>';
+        // $('.alert-container').append(errorAlert1);
+        // $('.alert-container').html('');
+        
+        $(".alert").hide();
+        $(document).ready(function() {
+            $(".btn-submit").click(function(event) {
+                /* TEXT */
+                $(".zorunlu-text").each(function() {
+                    if ($(this).val() == "") {
+                        event.preventDefault();
+                        $(".alert").show();
+                        $(this).closest(".form-group").addClass("has-error");
+                    } else {
+                        $(this).closest(".form-group").removeClass("has-error");
+                    }
+                });
+                /* DROPDOWN */
+                $(".zorunlu-dropdown").each(function() {
+                    if ($(this).find("option:Selected").val() == -1) {
+                        event.preventDefault();
+                        $(".alert").show();
+                        $(this).closest(".form-group").addClass("has-error");
+                    } else {
+                        $(this).closest(".form-group").removeClass("has-error");
+                    }
+                });
+                /* CHECKBOX */
+                $(".zorunlu-check").each(function() {
+                    if (this.checked == false) {
+                        event.preventDefault();
+                        $(".alert").show();
+                        $(this).closest(".form-group").addClass("has-error");
+                    } else {
+                        $(this).closest(".form-group").removeClass("has-error");
+                    }
+                });
+                /* RADIO */
+                $(".zorunlu-radio").each(function() {
+                    if (!$('input:radio:checked').length > 0) {
+                        event.preventDefault();
+                        $(".alert").show();
+                        $(this).closest(".form-group").addClass("has-error");
+                    } else {
+                        $(this).closest(".form-group").removeClass("has-error");
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- VALIDATION -->
+</body>
+
+</html>
